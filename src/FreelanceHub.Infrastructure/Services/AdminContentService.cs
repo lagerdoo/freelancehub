@@ -292,6 +292,10 @@ public sealed class AdminContentService(FreelanceHubDbContext dbContext, EmailDe
         entity.HeroTitleEn = model.HeroTitleEn.Trim();
         entity.HeroSubtitleFr = model.HeroSubtitleFr.Trim();
         entity.HeroSubtitleEn = model.HeroSubtitleEn.Trim();
+        entity.AboutSummaryFr = model.AboutSummaryFr.Trim();
+        entity.AboutSummaryEn = model.AboutSummaryEn.Trim();
+        entity.SkillsFr = model.SkillsFr.Trim();
+        entity.SkillsEn = model.SkillsEn.Trim();
         entity.ContactEmail = model.ContactEmail.Trim();
         entity.Location = model.Location.Trim();
         entity.LinkedInUrl = model.LinkedInUrl.Trim();

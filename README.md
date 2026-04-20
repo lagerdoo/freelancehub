@@ -18,9 +18,23 @@ Production-ready bilingual freelance website and admin panel built with ASP.NET 
 - Contact inbox
 - Site settings management
 - Media upload and media library
+- CV import workflow for admin-assisted profile setup from a text-based PDF resume
 - SQLite by default, PostgreSQL-ready configuration
 - EF Core migrations and seed data
 - Production hardening for cookies, headers, proxy deployment, uploads, and PostgreSQL-first production config
+
+## Generic demo content
+
+The project now ships with reusable demo content instead of identity-specific profile data.
+
+- Site settings use neutral branding: `FreelanceHub Demo`
+- Services demonstrate common freelance technical offers
+- Projects are realistic but generic showcase examples
+- Experience entries describe reusable consultant/developer career patterns
+- Contact information and links use neutral placeholders
+
+Demo content is seeded only when the related tables are empty and demo seeding is enabled.
+It does not overwrite existing production data.
 
 ## Local setup
 
@@ -96,4 +110,5 @@ dotnet tool run dotnet-ef database update --project src/FreelanceHub.Infrastruct
 ## Additional project docs
 
 - QA checklist: [docs/QA_CHECKLIST.md](docs/QA_CHECKLIST.md)
+- CV import guide: [docs/CV_IMPORT.md](docs/CV_IMPORT.md)
 - OVH Linux VPS deployment: [docs/DEPLOY_OVH_LINUX_VPS.md](docs/DEPLOY_OVH_LINUX_VPS.md)

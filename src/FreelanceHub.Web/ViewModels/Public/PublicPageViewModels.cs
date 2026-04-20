@@ -10,6 +10,7 @@ public sealed class HomePageViewModel
 
 public sealed class AboutPageViewModel
 {
+    public SiteSetting SiteSetting { get; init; } = new();
     public IReadOnlyList<ExperienceEntry> ExperienceEntries { get; init; } = Array.Empty<ExperienceEntry>();
 }
 

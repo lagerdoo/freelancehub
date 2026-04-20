@@ -1,6 +1,9 @@
 @model FreelanceHub.Web.ViewModels.Public.AboutPageViewModel
 @{
     var culture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+    var site = Model.SiteSetting;
+    var skills = (culture.IsFrench() ? site.SkillsFr : site.SkillsEn)
+        .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 }
 
 <section class="section-shell first-section">
@@ -9,8 +12,17 @@
             <div class="col-lg-5">
                 <div class="section-card sticky-card">
                     <p class="eyebrow">@Html.Localize("Profile", "Profil")</p>
-                    <h1>@Html.Localize("A backend architect focused on stable delivery", "Un architecte backend oriente delivery stable")</h1>
-                    <p class="text-secondary">@Html.Localize("I work best where systems have grown faster than their foundations: unclear boundaries, legacy friction, fragile deployment paths, and teams under pressure to move without breaking production.", "J'interviens surtout la ou les systemes ont grandi plus vite que leurs fondations : frontieres floues, heritage technique, chemins de deploiement fragiles et equipes sous pression.")</p>
+                    <h1>@site.Localize(culture, x => x.TaglineEn, x => x.TaglineFr)</h1>
+                    <p class="text-secondary">@site.Localize(culture, x => x.AboutSummaryEn, x => x.AboutSummaryFr)</p>
+                    @if (skills.Length > 0)
+                    {
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            @foreach (var skill in skills)
+                            {
+                                <span class="tech-badge">@skill</span>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
             <div class="col-lg-7">

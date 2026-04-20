@@ -1,0 +1,81 @@
+@model CvImportIndexViewModel
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="section-card h-100">
+            <h3 class="mb-3">Import a CV</h3>
+            <p class="text-secondary">Upload a text-based PDF resume to generate editable suggestions for profile content, experience, services, and projects. Nothing is published or overwritten automatically.</p>
+            <form method="post" enctype="multipart/form-data" class="row g-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+                <div class="col-12">
+                    <label asp-for="Upload.File" class="form-label"></label>
+                    <input asp-for="Upload.File" class="form-control" accept=".pdf,application/pdf" />
+                    <span asp-validation-for="Upload.File" class="text-danger small"></span>
+                    <div class="form-text">Supported in V1: text-based PDF only. Scanned PDFs and OCR are not supported.</div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-accent">Upload and review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="section-card h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="mb-0">Recent CV imports</h3>
+                <span class="text-secondary small">Private admin-only files</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-dark align-middle mb-0 admin-table">
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Created</th>
+                            <th>Applied</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Imports.Any())
+                        {
+                            <tr>
+                                <td colspan="5" class="text-secondary">No CV imports yet.</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.Imports)
+                            {
+                                <tr>
+                                    <td class="media-file-name" title="@item.OriginalFileName">@item.OriginalFileName</td>
+                                    <td>@item.CreatedAtUtc.ToLocalTime().ToString("g")</td>
+                                    <td>@(item.AppliedAtUtc?.ToLocalTime().ToString("g") ?? "Not applied")</td>
+                                    <td>@(item.IsDeleted ? "Deleted" : "Available")</td>
+                                    <td class="text-end">
+                                        @if (!item.IsDeleted)
+                                        {
+                                            <a asp-action="Review" asp-route-id="@item.Id" class="btn btn-sm btn-outline-light">Review</a>
+                                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline row-action-form ms-2">
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        data-delete-confirm="true"
+                                                        data-delete-message="Delete this uploaded CV file?">
+                                                    <i class="fa-solid fa-trash me-1"></i>Delete
+                                                </button>
+                                            </form>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

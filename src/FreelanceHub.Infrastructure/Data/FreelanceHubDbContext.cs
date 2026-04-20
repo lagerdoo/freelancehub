@@ -11,6 +11,7 @@ public sealed class FreelanceHubDbContext(DbContextOptions<FreelanceHubDbContext
     public DbSet<Project> Projects => Set<Project>();
     public DbSet<ExperienceEntry> ExperienceEntries => Set<ExperienceEntry>();
     public DbSet<ContactMessage> ContactMessages => Set<ContactMessage>();
+    public DbSet<CvImportRecord> CvImportRecords => Set<CvImportRecord>();
     public DbSet<SiteSetting> SiteSettings => Set<SiteSetting>();
     public DbSet<UploadedMedia> UploadedMedia => Set<UploadedMedia>();
 
@@ -94,6 +95,10 @@ public sealed class FreelanceHubDbContext(DbContextOptions<FreelanceHubDbContext
             entity.Property(x => x.SiteName).HasMaxLength(150).IsRequired();
             entity.Property(x => x.TaglineFr).HasMaxLength(250).IsRequired();
             entity.Property(x => x.TaglineEn).HasMaxLength(250).IsRequired();
+            entity.Property(x => x.AboutSummaryFr).HasMaxLength(3000).IsRequired();
+            entity.Property(x => x.AboutSummaryEn).HasMaxLength(3000).IsRequired();
+            entity.Property(x => x.SkillsFr).HasMaxLength(1000).IsRequired();
+            entity.Property(x => x.SkillsEn).HasMaxLength(1000).IsRequired();
             entity.Property(x => x.ContactEmail).HasMaxLength(256).IsRequired();
             entity.Property(x => x.Location).HasMaxLength(160).IsRequired();
             entity.Property(x => x.LinkedInUrl).HasMaxLength(300);
@@ -106,6 +111,16 @@ public sealed class FreelanceHubDbContext(DbContextOptions<FreelanceHubDbContext
             entity.Property(x => x.MetaTitleEn).HasMaxLength(180).IsRequired();
             entity.Property(x => x.MetaDescriptionFr).HasMaxLength(320).IsRequired();
             entity.Property(x => x.MetaDescriptionEn).HasMaxLength(320).IsRequired();
+        });
+
+        modelBuilder.Entity<CvImportRecord>(entity =>
+        {
+            entity.ToTable("CvImportRecords");
+            entity.Property(x => x.OriginalFileName).HasMaxLength(260).IsRequired();
+            entity.Property(x => x.StoredFileName).HasMaxLength(260).IsRequired();
+            entity.Property(x => x.ContentType).HasMaxLength(100).IsRequired();
+            entity.Property(x => x.StoragePath).HasMaxLength(400).IsRequired();
+            entity.Property(x => x.ExtractedText).IsRequired();
         });
 
         modelBuilder.Entity<UploadedMedia>(entity =>

@@ -32,7 +32,11 @@ public sealed class HomeController(
         var experience = await contentQueryService.GetVisibleExperienceEntriesAsync(cancellationToken);
         SetPublicPageMetadata(siteSetting , culture , culture.IsFrench() ? "A propos" : "About");
 
-        return View(new AboutPageViewModel { ExperienceEntries = experience });
+        return View(new AboutPageViewModel
+        {
+            SiteSetting = siteSetting,
+            ExperienceEntries = experience
+        });
     }
 
     [HttpGet("services")]

@@ -23,26 +23,30 @@ public sealed class DatabaseSeeder(
         {
             dbContext.SiteSettings.Add(new SiteSetting
             {
-                SiteName = "Marc Karim",
-                TaglineFr = "Consultant technique .NET et architecte backend freelance",
-                TaglineEn = "Freelance .NET technical consultant and backend architect",
-                HeroTitleFr = "Des plateformes .NET robustes, lisibles et pretes pour la production",
-                HeroTitleEn = "Robust, readable, production-ready .NET platforms",
-                HeroSubtitleFr = "J'interviens sur l'architecture, la modernisation, la performance et la fiabilite des applications critiques.",
-                HeroSubtitleEn = "I work on architecture, modernization, performance, and reliability for business-critical applications.",
-                ContactEmail = "hello@marckarim.dev",
-                Location = "Paris, France",
+                SiteName = "FreelanceHub Demo",
+                TaglineFr = "Template bilingue pour consultant technique et developpeur freelance",
+                TaglineEn = "Bilingual template for freelance developers and technical consultants",
+                HeroTitleFr = "Un site vitrine premium, simple a adapter a votre parcours",
+                HeroTitleEn = "A premium portfolio site designed to adapt to your own profile",
+                HeroSubtitleFr = "Ce projet sert de base reutilisable pour presenter services, experience, projets et informations de contact avec une administration securisee.",
+                HeroSubtitleEn = "This project is a reusable starting point for showcasing services, experience, projects, and contact details with a secure admin area.",
+                AboutSummaryFr = "FreelanceHub Demo est un exemple de site pour independants techniques. Il peut etre personnalise avec votre resume, vos experiences, vos offres et vos liens professionnels sans repartir de zero.",
+                AboutSummaryEn = "FreelanceHub Demo is a starter website for technical freelancers. It can be personalized with your resume, experience, offers, and professional links without rebuilding everything from scratch.",
+                SkillsFr = ".NET, ASP.NET Core, PostgreSQL, APIs, Architecture logicielle, Modernisation applicative",
+                SkillsEn = ".NET, ASP.NET Core, PostgreSQL, APIs, Software architecture, Application modernization",
+                ContactEmail = "contact@example.com",
+                Location = "Remote / Europe",
                 LinkedInUrl = "https://www.linkedin.com/",
                 GitHubUrl = "https://github.com/",
                 MaltUrl = "https://www.malt.fr/",
                 CalendlyUrl = "https://calendly.com/",
-                FooterTextFr = "Disponible pour des missions d'architecture .NET, audit technique et delivery backend.",
-                FooterTextEn = "Available for .NET architecture, technical audit, and backend delivery engagements.",
+                FooterTextFr = "Template de demarrage pour portfolio freelance et conseil technique.",
+                FooterTextEn = "Starter template for freelance portfolio and technical consulting websites.",
                 FaviconPath = "/favicon.ico",
-                MetaTitleFr = "Marc Karim | Consultant .NET freelance",
-                MetaTitleEn = "Marc Karim | Freelance .NET consultant",
-                MetaDescriptionFr = "Consultant freelance specialise en backend .NET, architecture logicielle, PostgreSQL, APIs et modernisation d'applications.",
-                MetaDescriptionEn = "Freelance consultant specialized in .NET backend, software architecture, PostgreSQL, APIs, and application modernization."
+                MetaTitleFr = "FreelanceHub Demo | Template consultant .NET",
+                MetaTitleEn = "FreelanceHub Demo | Freelance .NET consultant template",
+                MetaDescriptionFr = "Exemple reutilisable de site portfolio pour developpeur freelance, consultant backend, architecte logiciel ou expert technique.",
+                MetaDescriptionEn = "Reusable portfolio website example for freelance developers, backend consultants, software architects, and technical specialists."
             });
         }
 
@@ -51,25 +55,25 @@ public sealed class DatabaseSeeder(
             dbContext.Services.AddRange(
                 new Service
                 {
-                    TitleFr = "Architecture backend .NET",
-                    TitleEn = "Backend .NET architecture",
-                    SummaryFr = "Conception de solutions maintenables, modulaires et sobres en cout d'exploitation.",
-                    SummaryEn = "Design of maintainable, modular solutions with disciplined operating costs.",
-                    DescriptionFr = "Je structure des applications ASP.NET Core, APIs metier, couches d'acces aux donnees et pipelines d'execution pour tenir dans la duree.",
-                    DescriptionEn = "I structure ASP.NET Core applications, business APIs, data access layers, and execution pipelines built to last.",
+                    TitleFr = "Architecture backend et API",
+                    TitleEn = "Backend and API architecture",
+                    SummaryFr = "Conception de plateformes maintenables avec .NET, PostgreSQL et des integrations bien delimitees.",
+                    SummaryEn = "Design of maintainable platforms built with .NET, PostgreSQL, and well-defined integrations.",
+                    DescriptionFr = "Service type pour independants techniques intervenant sur la structure applicative, les APIs, la couche data et la lisibilite du code.",
+                    DescriptionEn = "Template service for technical freelancers who work on application structure, APIs, data layers, and code readability.",
                     IconClass = "bi bi-diagram-3",
                     DisplayOrder = 1,
                     IsPublished = true,
-                    Slug = "backend-dotnet-architecture"
+                    Slug = "backend-api-architecture"
                 },
                 new Service
                 {
-                    TitleFr = "Modernisation d'applications",
-                    TitleEn = "Application modernization",
-                    SummaryFr = "Migration progressive d'heritage technique vers une base plus saine et plus simple a faire evoluer.",
-                    SummaryEn = "Progressive migration from legacy constraints to a healthier and easier-to-evolve codebase.",
-                    DescriptionFr = "Je reprends des applications existantes, reduis la dette technique, separe les responsabilites et prepare un delivery plus fiable.",
-                    DescriptionEn = "I take over existing applications, reduce technical debt, separate responsibilities, and prepare a more reliable delivery model.",
+                    TitleFr = "Modernisation et remise a plat",
+                    TitleEn = "Modernization and recovery",
+                    SummaryFr = "Reprise d'applications existantes avec reduction de dette technique et feuille de route pragmatique.",
+                    SummaryEn = "Recovery of existing applications with technical debt reduction and a pragmatic modernization roadmap.",
+                    DescriptionFr = "Exemple de prestation pour rebatir des fondations solides sans bloquer l'activite ni repartir de zero.",
+                    DescriptionEn = "Example offer focused on rebuilding solid foundations without freezing delivery or rewriting everything at once.",
                     IconClass = "bi bi-arrow-repeat",
                     DisplayOrder = 2,
                     IsPublished = true,
@@ -77,16 +81,16 @@ public sealed class DatabaseSeeder(
                 },
                 new Service
                 {
-                    TitleFr = "Audit performance et fiabilite",
-                    TitleEn = "Performance and reliability audit",
-                    SummaryFr = "Analyse des points de friction sur les APIs, la base de donnees et les traitements critiques.",
-                    SummaryEn = "Analysis of bottlenecks across APIs, databases, and critical processing flows.",
-                    DescriptionFr = "Je cible les goulets d'etranglement, les risques de production et les leviers de simplification pour retrouver de la marge.",
-                    DescriptionEn = "I target bottlenecks, production risks, and simplification opportunities to regain execution margin.",
+                    TitleFr = "Audit fiabilite et delivery",
+                    TitleEn = "Reliability and delivery review",
+                    SummaryFr = "Analyse des zones de risque sur la production, les deploiements et les traitements critiques.",
+                    SummaryEn = "Assessment of production risk, deployment fragility, and critical processing paths.",
+                    DescriptionFr = "Exemple d'offre orientee diagnostic, priorisation et plan d'action pour retrouver une execution plus sereine.",
+                    DescriptionEn = "Example offer centered on diagnostics, prioritization, and an action plan for steadier delivery.",
                     IconClass = "bi bi-speedometer2",
                     DisplayOrder = 3,
                     IsPublished = true,
-                    Slug = "performance-reliability-audit"
+                    Slug = "reliability-delivery-review"
                 });
         }
 
@@ -95,46 +99,46 @@ public sealed class DatabaseSeeder(
             dbContext.Projects.AddRange(
                 new Project
                 {
-                    TitleFr = "Plateforme B2B de gestion de commandes",
-                    TitleEn = "B2B order management platform",
-                    SummaryFr = "Refonte d'un socle monolithique en plateforme modulaire ASP.NET Core et PostgreSQL.",
-                    SummaryEn = "Transformation of a brittle monolith into a modular ASP.NET Core and PostgreSQL platform.",
-                    DescriptionFr = "Mission orientee architecture et delivery avec rationalisation des traitements, securisation des integrations et baisse des incidents.",
-                    DescriptionEn = "Architecture and delivery engagement focused on streamlining workflows, securing integrations, and reducing incidents.",
+                    TitleFr = "Plateforme de gestion partenaires",
+                    TitleEn = "Partner operations platform",
+                    SummaryFr = "Exemple de refonte d'un outil metier en plateforme ASP.NET Core avec workflows, reporting et administration.",
+                    SummaryEn = "Example redesign of a business tool into an ASP.NET Core platform with workflows, reporting, and administration.",
+                    DescriptionFr = "Projet de demonstration pour illustrer l'organisation d'une plateforme metier modulaire avec une base PostgreSQL et une interface admin claire.",
+                    DescriptionEn = "Demo project illustrating how to structure a modular business platform with PostgreSQL and a clear administration experience.",
                     TechStack = ".NET 8, ASP.NET Core MVC, PostgreSQL, EF Core, Redis, Docker",
                     ExternalLink = "https://example.com",
                     IsFeatured = true,
                     DisplayOrder = 1,
                     IsPublished = true,
-                    Slug = "b2b-order-management-platform"
+                    Slug = "partner-operations-platform"
                 },
                 new Project
                 {
-                    TitleFr = "Back office de supervision metier",
-                    TitleEn = "Business supervision back office",
-                    SummaryFr = "Conception d'un portail interne pour piloter flux, incidents et operations sensibles.",
-                    SummaryEn = "Design of an internal portal to oversee workflows, incidents, and sensitive operations.",
-                    DescriptionFr = "Implementation d'une interface admin claire, d'une couche service testable et d'un modele de donnees oriente exploitation.",
-                    DescriptionEn = "Implementation of a clear admin interface, a testable service layer, and an operations-oriented data model.",
+                    TitleFr = "Portail interne de supervision",
+                    TitleEn = "Internal supervision portal",
+                    SummaryFr = "Exemple de back-office pour piloter incidents, file d'attente, operations sensibles et suivi d'activite.",
+                    SummaryEn = "Example back-office portal for incident handling, queue monitoring, sensitive operations, and activity tracking.",
+                    DescriptionFr = "Projet type pour mettre en avant une interface admin sobre, des listes exploitables et une logique metier orientee operations.",
+                    DescriptionEn = "Template project showcasing a restrained admin interface, operational lists, and service logic designed for internal teams.",
                     TechStack = ".NET 8, Razor Views, Bootstrap 5, SQLite, EF Core",
                     IsFeatured = true,
                     DisplayOrder = 2,
                     IsPublished = true,
-                    Slug = "business-supervision-back-office"
+                    Slug = "internal-supervision-portal"
                 },
                 new Project
                 {
-                    TitleFr = "API de synchronisation multi-systemes",
-                    TitleEn = "Multi-system synchronization API",
-                    SummaryFr = "Stabilisation d'une API d'integration confrontee a des volumes et a des contrats externes heterogenes.",
-                    SummaryEn = "Stabilization of an integration API facing volume pressure and heterogeneous external contracts.",
-                    DescriptionFr = "Travail sur la resilience, l'idempotence, la tracabilite et la reduction des reprises manuelles.",
-                    DescriptionEn = "Focused work on resilience, idempotency, traceability, and the reduction of manual recovery tasks.",
+                    TitleFr = "Moteur de synchronisation multi-tenant",
+                    TitleEn = "Multi-tenant synchronization engine",
+                    SummaryFr = "Exemple d'API d'integration pour synchroniser catalogues, commandes ou donnees de reference entre plusieurs systemes.",
+                    SummaryEn = "Example integration API used to synchronize catalogs, orders, or reference data across multiple systems.",
+                    DescriptionFr = "Projet de demonstration autour de la resilience, de l'idempotence, de la tracabilite et de la reduction des interventions manuelles.",
+                    DescriptionEn = "Demo project centered on resilience, idempotency, traceability, and the reduction of manual intervention.",
                     TechStack = ".NET 8, Minimal APIs, PostgreSQL, Hangfire, OpenTelemetry",
                     IsFeatured = true,
                     DisplayOrder = 3,
                     IsPublished = true,
-                    Slug = "multi-system-synchronization-api"
+                    Slug = "multi-tenant-synchronization-engine"
                 });
         }
 
@@ -143,41 +147,41 @@ public sealed class DatabaseSeeder(
             dbContext.ExperienceEntries.AddRange(
                 new ExperienceEntry
                 {
-                    RoleFr = "Consultant backend .NET freelance",
-                    RoleEn = "Freelance .NET backend consultant",
-                    Company = "Independent",
-                    Location = "Paris / Remote",
+                    RoleFr = "Consultant technique freelance",
+                    RoleEn = "Freelance technical consultant",
+                    Company = "Independent practice",
+                    Location = "Remote / Europe",
                     StartDate = new DateOnly(2022, 1, 1),
-                    DescriptionFr = "Interventions sur architecture, revue technique, delivery backend et reprise d'applications sensibles.",
-                    DescriptionEn = "Engagements across architecture, technical review, backend delivery, and recovery of sensitive applications.",
+                    DescriptionFr = "Exemple d'activite independante centree sur architecture applicative, accompagnement delivery et modernisation progressive.",
+                    DescriptionEn = "Example independent practice focused on application architecture, delivery support, and incremental modernization.",
                     Technologies = ".NET, ASP.NET Core, PostgreSQL, SQL, Docker, Azure",
                     DisplayOrder = 1,
                     IsVisible = true
                 },
                 new ExperienceEntry
                 {
-                    RoleFr = "Lead developpeur .NET",
-                    RoleEn = "Lead .NET developer",
-                    Company = "Fintech Scale-up",
-                    Location = "Paris",
+                    RoleFr = "Lead developpeur backend",
+                    RoleEn = "Lead backend developer",
+                    Company = "SaaS product company",
+                    Location = "Remote",
                     StartDate = new DateOnly(2019, 2, 1),
                     EndDate = new DateOnly(2021, 12, 31),
-                    DescriptionFr = "Pilotage technique d'une equipe backend, refonte de flux critiques et structuration du delivery.",
-                    DescriptionEn = "Technical leadership for a backend team, redesign of critical flows, and delivery process hardening.",
+                    DescriptionFr = "Exemple d'experience sur le pilotage technique, la priorisation des travaux structurants et la fiabilisation de flux critiques.",
+                    DescriptionEn = "Example experience in technical leadership, structural prioritization, and stabilization of critical business flows.",
                     Technologies = "ASP.NET Core, SQL Server, RabbitMQ, Redis, CI/CD",
                     DisplayOrder = 2,
                     IsVisible = true
                 },
                 new ExperienceEntry
                 {
-                    RoleFr = "Ingenieur logiciel .NET",
-                    RoleEn = ".NET software engineer",
-                    Company = "Digital Services Company",
-                    Location = "Lyon",
+                    RoleFr = "Ingenieur logiciel",
+                    RoleEn = "Software engineer",
+                    Company = "Digital delivery studio",
+                    Location = "Hybrid",
                     StartDate = new DateOnly(2015, 9, 1),
                     EndDate = new DateOnly(2019, 1, 31),
-                    DescriptionFr = "Developpement de plateformes metier, APIs et outils internes pour des clients grands comptes.",
-                    DescriptionEn = "Development of business platforms, APIs, and internal tools for enterprise clients.",
+                    DescriptionFr = "Exemple d'interventions sur des plateformes metier, des APIs et des outils internes pour plusieurs contextes clients.",
+                    DescriptionEn = "Example work across business platforms, APIs, and internal tools for several client contexts.",
                     Technologies = "C#, ASP.NET MVC, Web API, Entity Framework, SQL",
                     DisplayOrder = 3,
                     IsVisible = true

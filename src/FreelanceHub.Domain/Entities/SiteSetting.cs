@@ -11,6 +11,10 @@ public sealed class SiteSetting : EntityBase
     public string HeroTitleEn { get; set; } = string.Empty;
     public string HeroSubtitleFr { get; set; } = string.Empty;
     public string HeroSubtitleEn { get; set; } = string.Empty;
+    public string AboutSummaryFr { get; set; } = string.Empty;
+    public string AboutSummaryEn { get; set; } = string.Empty;
+    public string SkillsFr { get; set; } = string.Empty;
+    public string SkillsEn { get; set; } = string.Empty;
     public string ContactEmail { get; set; } = string.Empty;
     public string Location { get; set; } = string.Empty;
     public string LinkedInUrl { get; set; } = string.Empty;

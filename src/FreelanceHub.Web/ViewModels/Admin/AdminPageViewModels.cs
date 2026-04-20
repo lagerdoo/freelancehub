@@ -156,6 +156,18 @@ public sealed class SiteSettingFormViewModel
     [Required]
     public string HeroSubtitleEn { get; set; } = string.Empty;
 
+    [Required]
+    public string AboutSummaryFr { get; set; } = string.Empty;
+
+    [Required]
+    public string AboutSummaryEn { get; set; } = string.Empty;
+
+    [Required, StringLength(1000)]
+    public string SkillsFr { get; set; } = string.Empty;
+
+    [Required, StringLength(1000)]
+    public string SkillsEn { get; set; } = string.Empty;
+
     [Required, EmailAddress, StringLength(256)]
     public string ContactEmail { get; set; } = string.Empty;
 

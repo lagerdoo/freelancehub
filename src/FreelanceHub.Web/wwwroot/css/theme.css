@@ -462,6 +462,16 @@ a:hover {
   background: rgba(255, 255, 255, 0.03);
 }
 
+.cv-preview {
+  white-space: pre-wrap;
+  max-height: 28rem;
+  overflow: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.02);
+}
+
 .media-file-name {
   max-width: 100%;
   overflow: hidden;

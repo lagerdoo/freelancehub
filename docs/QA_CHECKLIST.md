@@ -65,6 +65,37 @@
 - Message status icons display correctly for unread, read, and archived states.
 - Service icon preview updates correctly in admin and matches the public Services UI.
 
+## Generic demo template checks
+
+- Fresh seed data does not contain personal branding, personal email addresses, or identity-specific profile claims.
+- Public site copy feels reusable for a generic freelance developer / technical consultant template.
+- About page content is driven by site settings rather than hardcoded personal text.
+- Demo services, projects, and experience entries read as credible reusable placeholders.
+
+## CV import checks
+
+- `Admin > CV import` page loads correctly.
+- Upload accepts a valid text-based PDF.
+- Upload rejects non-PDF files.
+- Upload rejects invalid or empty PDFs.
+- Uploaded CV files are not exposed under `wwwroot`.
+- Review page displays extracted text preview.
+- Review page shows editable suggestions for profile, experience, and services when present.
+- Project suggestions are only shown when the parser identifies plausible project content.
+- Unselected suggestions are skipped on apply.
+- Selected profile suggestions update site settings only after confirmation.
+- Selected services are saved as unpublished drafts.
+- Selected projects are saved as unpublished drafts.
+- Selected experience entries are saved as hidden entries.
+- `Delete uploaded CV after apply` removes the private file/import record from active use.
+- Import history shows created/applied/deleted status correctly.
+
+## CV import limitations awareness
+
+- Scanned PDFs without embedded text do not import successfully in V1.
+- Imported bilingual fields may initially mirror the same source text and require manual translation review.
+- Imported content is reviewed and editable before persistence.
+
 ## Language checks
 
 - French content fields are displayed on `/fr`.

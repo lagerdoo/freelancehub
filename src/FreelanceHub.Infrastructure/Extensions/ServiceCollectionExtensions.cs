@@ -16,6 +16,7 @@ public static class ServiceCollectionExtensions
     {
         services.Configure<DatabaseOptions>(configuration.GetSection(DatabaseOptions.SectionName));
         services.Configure<UploadOptions>(configuration.GetSection(UploadOptions.SectionName));
+        services.Configure<CvImportOptions>(configuration.GetSection(CvImportOptions.SectionName));
         services.Configure<SmtpOptions>(configuration.GetSection(SmtpOptions.SectionName));
 
         services.AddDbContext<FreelanceHubDbContext>((serviceProvider, options) =>
@@ -41,6 +42,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IAdminAuthService, AdminAuthService>();
         services.AddScoped<IAdminContentService, AdminContentService>();
+        services.AddScoped<ICvImportService, CvImportService>();
         services.AddScoped<IContentQueryService, ContentQueryService>();
         services.AddScoped<IMediaService, MediaService>();
         services.AddScoped<EmailDeliveryService>();

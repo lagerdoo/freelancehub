@@ -1,0 +1,282 @@
+@model CvImportReviewViewModel
+
+<partial name="_AdminBackButton" model="@Url.Action("Index", "CvImport", new { area = "Admin" })!" />
+
+<form asp-action="Apply" asp-route-id="@Model.ImportId" method="post" class="d-grid gap-4">
+    <input asp-for="ImportId" type="hidden" />
+
+    <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+            <div>
+                <p class="eyebrow mb-1">Import review</p>
+                <h3 class="mb-0">@Model.OriginalFileName</h3>
+            </div>
+            <div class="form-check">
+                <input asp-for="DeleteFileAfterApply" class="form-check-input" />
+                <label asp-for="DeleteFileAfterApply" class="form-check-label">Delete uploaded CV after apply</label>
+            </div>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+        <p class="text-secondary mb-0">Imported suggestions use the extracted CV language as a placeholder for both English and French fields. Review the content before publishing it.</p>
+    </div>
+
+    <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+            <div>
+                <p class="eyebrow mb-1">Profile mapping</p>
+                <h3 class="mb-0">About and contact suggestions</h3>
+            </div>
+            <div class="form-check">
+                <input asp-for="Profile.Selected" class="form-check-input" />
+                <label asp-for="Profile.Selected" class="form-check-label">Apply profile suggestions</label>
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="Profile.SiteName" class="form-label"></label>
+                <input asp-for="Profile.SiteName" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Profile.ContactEmail" class="form-label"></label>
+                <input asp-for="Profile.ContactEmail" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Profile.TaglineEn" class="form-label"></label>
+                <input asp-for="Profile.TaglineEn" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Profile.TaglineFr" class="form-label"></label>
+                <input asp-for="Profile.TaglineFr" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Profile.AboutSummaryEn" class="form-label"></label>
+                <textarea asp-for="Profile.AboutSummaryEn" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Profile.AboutSummaryFr" class="form-label"></label>
+                <textarea asp-for="Profile.AboutSummaryFr" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Profile.SkillsEn" class="form-label"></label>
+                <textarea asp-for="Profile.SkillsEn" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Profile.SkillsFr" class="form-label"></label>
+                <textarea asp-for="Profile.SkillsFr" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Profile.Location" class="form-label"></label>
+                <input asp-for="Profile.Location" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Profile.LinkedInUrl" class="form-label"></label>
+                <input asp-for="Profile.LinkedInUrl" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Profile.GitHubUrl" class="form-label"></label>
+                <input asp-for="Profile.GitHubUrl" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <p class="eyebrow mb-1">Experience</p>
+                <h3 class="mb-0">Suggested experience entries</h3>
+            </div>
+            <span class="text-secondary small">Saved as hidden entries for review</span>
+        </div>
+        <div class="d-grid gap-3">
+            @if (!Model.ExperienceEntries.Any())
+            {
+                <p class="text-secondary mb-0">No experience entries were identified with enough structure.</p>
+            }
+            else
+            {
+                @for (var index = 0; index < Model.ExperienceEntries.Count; index++)
+                {
+                    <div class="admin-inline-note">
+                        <div class="form-check mb-3">
+                            <input asp-for="ExperienceEntries[index].Selected" class="form-check-input" />
+                            <label asp-for="ExperienceEntries[index].Selected" class="form-check-label">Import this experience entry</label>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="ExperienceEntries[index].RoleEn" class="form-label"></label>
+                                <input asp-for="ExperienceEntries[index].RoleEn" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ExperienceEntries[index].RoleFr" class="form-label"></label>
+                                <input asp-for="ExperienceEntries[index].RoleFr" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="ExperienceEntries[index].Company" class="form-label"></label>
+                                <input asp-for="ExperienceEntries[index].Company" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="ExperienceEntries[index].Location" class="form-label"></label>
+                                <input asp-for="ExperienceEntries[index].Location" class="form-control" />
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="ExperienceEntries[index].StartDate" class="form-label"></label>
+                                <input asp-for="ExperienceEntries[index].StartDate" class="form-control" />
+                            </div>
+                            <div class="col-md-2">
+                                <label asp-for="ExperienceEntries[index].EndDate" class="form-label"></label>
+                                <input asp-for="ExperienceEntries[index].EndDate" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ExperienceEntries[index].DescriptionEn" class="form-label"></label>
+                                <textarea asp-for="ExperienceEntries[index].DescriptionEn" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ExperienceEntries[index].DescriptionFr" class="form-label"></label>
+                                <textarea asp-for="ExperienceEntries[index].DescriptionFr" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="ExperienceEntries[index].Technologies" class="form-label"></label>
+                                <input asp-for="ExperienceEntries[index].Technologies" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <p class="eyebrow mb-1">Services</p>
+                <h3 class="mb-0">Suggested services</h3>
+            </div>
+            <span class="text-secondary small">Saved as unpublished drafts</span>
+        </div>
+        <div class="d-grid gap-3">
+            @if (!Model.Services.Any())
+            {
+                <p class="text-secondary mb-0">No service suggestions were generated.</p>
+            }
+            else
+            {
+                @for (var index = 0; index < Model.Services.Count; index++)
+                {
+                    <div class="admin-inline-note">
+                        <div class="form-check mb-3">
+                            <input asp-for="Services[index].Selected" class="form-check-input" />
+                            <label asp-for="Services[index].Selected" class="form-check-label">Import this service</label>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Services[index].TitleEn" class="form-label"></label>
+                                <input asp-for="Services[index].TitleEn" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Services[index].TitleFr" class="form-label"></label>
+                                <input asp-for="Services[index].TitleFr" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Services[index].SummaryEn" class="form-label"></label>
+                                <textarea asp-for="Services[index].SummaryEn" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Services[index].SummaryFr" class="form-label"></label>
+                                <textarea asp-for="Services[index].SummaryFr" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Services[index].DescriptionEn" class="form-label"></label>
+                                <textarea asp-for="Services[index].DescriptionEn" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Services[index].DescriptionFr" class="form-label"></label>
+                                <textarea asp-for="Services[index].DescriptionFr" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Services[index].IconClass" class="form-label"></label>
+                                <input asp-for="Services[index].IconClass" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <p class="eyebrow mb-1">Projects</p>
+                <h3 class="mb-0">Low-confidence project suggestions</h3>
+            </div>
+            <span class="text-secondary small">Optional, saved as unpublished drafts</span>
+        </div>
+        <div class="d-grid gap-3">
+            @if (!Model.Projects.Any())
+            {
+                <p class="text-secondary mb-0">No project suggestions were identified with enough confidence.</p>
+            }
+            else
+            {
+                @for (var index = 0; index < Model.Projects.Count; index++)
+                {
+                    <div class="admin-inline-note">
+                        <div class="form-check mb-3">
+                            <input asp-for="Projects[index].Selected" class="form-check-input" />
+                            <label asp-for="Projects[index].Selected" class="form-check-label">Import this project suggestion</label>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Projects[index].TitleEn" class="form-label"></label>
+                                <input asp-for="Projects[index].TitleEn" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Projects[index].TitleFr" class="form-label"></label>
+                                <input asp-for="Projects[index].TitleFr" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Projects[index].SummaryEn" class="form-label"></label>
+                                <textarea asp-for="Projects[index].SummaryEn" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Projects[index].SummaryFr" class="form-label"></label>
+                                <textarea asp-for="Projects[index].SummaryFr" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Projects[index].DescriptionEn" class="form-label"></label>
+                                <textarea asp-for="Projects[index].DescriptionEn" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Projects[index].DescriptionFr" class="form-label"></label>
+                                <textarea asp-for="Projects[index].DescriptionFr" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="Projects[index].TechStack" class="form-label"></label>
+                                <input asp-for="Projects[index].TechStack" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <p class="eyebrow mb-1">Extracted text preview</p>
+                <h3 class="mb-0">What the parser could read</h3>
+            </div>
+        </div>
+        <pre class="mb-0 small text-secondary cv-preview">@Model.ExtractedTextPreview</pre>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+        <button type="submit" class="btn btn-accent">Apply selected changes</button>
+        <a asp-action="Index" class="btn btn-outline-light">Back to imports</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
