@@ -1,0 +1,47 @@
+@model FreelanceHub.Web.ViewModels.Admin.MediaUploadViewModel
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="section-card h-100">
+            <h3 class="mb-3">Upload image</h3>
+            <form method="post" enctype="multipart/form-data" class="row g-3">
+                <div class="col-12">
+                    <label asp-for="File" class="form-label"></label>
+                    <input asp-for="File" class="form-control" />
+                    <span asp-validation-for="File" class="text-danger small"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="AltTextEn" class="form-label"></label>
+                    <input asp-for="AltTextEn" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label asp-for="AltTextFr" class="form-label"></label>
+                    <input asp-for="AltTextFr" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-accent">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="section-card h-100">
+            <h3 class="mb-3">Media library</h3>
+            <div class="row g-3">
+                @foreach (var item in Model.ExistingMedia)
+                {
+                    <div class="col-md-6">
+                        <div class="project-card h-100">
+                            <img src="@item.RelativePath" alt="@item.AltTextEn" class="img-fluid rounded-4 mb-3" />
+                            <div class="small text-secondary text-break media-meta">@item.RelativePath</div>
+                            <div class="media-file-name" title="@item.OriginalFileName">@item.OriginalFileName</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

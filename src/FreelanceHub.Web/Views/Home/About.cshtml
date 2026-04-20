@@ -1,0 +1,59 @@
+@model FreelanceHub.Web.ViewModels.Public.AboutPageViewModel
+@{
+    var culture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+}
+
+<section class="section-shell first-section">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <div class="col-lg-5">
+                <div class="section-card sticky-card">
+                    <p class="eyebrow">@Html.Localize("Profile", "Profil")</p>
+                    <h1>@Html.Localize("A backend architect focused on stable delivery", "Un architecte backend oriente delivery stable")</h1>
+                    <p class="text-secondary">@Html.Localize("I work best where systems have grown faster than their foundations: unclear boundaries, legacy friction, fragile deployment paths, and teams under pressure to move without breaking production.", "J'interviens surtout la ou les systemes ont grandi plus vite que leurs fondations : frontieres floues, heritage technique, chemins de deploiement fragiles et equipes sous pression.")</p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="section-card">
+                    <p class="eyebrow">@Html.Localize("Approach", "Approche")</p>
+                    <div class="about-grid">
+                        <div>
+                            <h3>@Html.Localize("Practical architecture", "Architecture pragmatique")</h3>
+                            <p>@Html.Localize("Clear layering, explicit contracts, and operational choices aligned with hosting cost and team size.", "Couches claires, contrats explicites et choix operationnels alignes sur le cout d'hebergement et la taille d'equipe.")</p>
+                        </div>
+                        <div>
+                            <h3>@Html.Localize("Low-drama delivery", "Delivery sans theatre")</h3>
+                            <p>@Html.Localize("The goal is not to impress a diagram. It is to ship reliably, recover quickly, and keep future changes affordable.", "Le but n'est pas d'impressionner avec un schema. Il faut livrer de facon fiable, recuperer vite et garder les evolutions abordables.")</p>
+                        </div>
+                        <div>
+                            <h3>@Html.Localize("Strong data discipline", "Discipline data forte")</h3>
+                            <p>@Html.Localize("Database design, query behavior, and transactional boundaries are treated as first-class architecture concerns.", "Le modele de donnees, le comportement des requetes et les frontieres transactionnelles sont traites comme des sujets d'architecture centraux.")</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-shell compact-top">
+    <div class="container">
+        <div class="section-heading">
+            <p class="eyebrow">@Html.Localize("Experience snapshot", "Apercu experience")</p>
+            <h2>@Html.Localize("Relevant background for consulting missions", "Parcours pertinent pour des missions de conseil")</h2>
+        </div>
+        <div class="timeline-stack">
+            @foreach (var item in Model.ExperienceEntries)
+            {
+                <article class="timeline-card">
+                    <div class="timeline-dates">@item.StartDate.ToString("MM/yyyy") - @(item.EndDate?.ToString("MM/yyyy") ?? (culture.IsFrench() ? "Aujourd'hui" : "Present"))</div>
+                    <div>
+                        <h3>@item.GetRole(culture)</h3>
+                        <p class="timeline-company">@item.Company • @item.Location</p>
+                        <p>@item.GetDescription(culture)</p>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>

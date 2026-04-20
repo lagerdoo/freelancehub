@@ -1,0 +1,25 @@
+@{
+    Layout = "_SiteLayout";
+    ViewBag.CurrentCulture = "en";
+    ViewBag.SiteSetting = new SiteSetting
+    {
+        SiteName = "FreelanceHub",
+        MetaDescriptionEn = "The requested page is currently unavailable.",
+        MetaDescriptionFr = "La page demandee est actuellement indisponible.",
+        FooterTextEn = "Built for demanding backend and architecture engagements.",
+        FooterTextFr = "Concu pour des missions backend et architecture exigeantes."
+    };
+    ViewBag.MetaTitle = "Application error";
+    ViewBag.MetaDescription = "The requested page is currently unavailable.";
+}
+
+<section class="section-shell first-section">
+    <div class="container">
+        <div class="section-card text-center p-5">
+            <p class="eyebrow">FreelanceHub</p>
+            <h1 class="display-5">Something went wrong.</h1>
+            <p class="lead text-secondary">The request could not be completed cleanly. Please return to the homepage or try again in a moment.</p>
+            <a class="btn btn-accent mt-3" href="/fr">Back to homepage</a>
+        </div>
+    </div>
+</section>

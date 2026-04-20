@@ -1,0 +1,30 @@
+@model FreelanceHub.Web.ViewModels.Public.ProjectsPageViewModel
+@{
+    var culture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+}
+
+<section class="section-shell first-section">
+    <div class="container">
+        <div class="section-heading narrow">
+            <p class="eyebrow">@Html.Localize("Projects", "Projets")</p>
+            <h1>@Html.Localize("Selected engagements", "Missions selectionnees")</h1>
+        </div>
+        <div class="row g-4">
+            @foreach (var project in Model.Projects)
+            {
+                <div class="col-lg-6">
+                    <article class="project-card h-100">
+                        <div class="project-meta">@project.TechStack</div>
+                        <h3>@project.GetTitle(culture)</h3>
+                        <p class="text-secondary">@project.GetSummary(culture)</p>
+                        <p>@project.GetDescription(culture)</p>
+                        @if (!string.IsNullOrWhiteSpace(project.ExternalLink))
+                        {
+                            <a href="@project.ExternalLink" target="_blank" rel="noreferrer">@Html.Localize("Visit project", "Voir le projet")</a>
+                        }
+                    </article>
+                </div>
+            }
+        </div>
+    </div>
+</section>

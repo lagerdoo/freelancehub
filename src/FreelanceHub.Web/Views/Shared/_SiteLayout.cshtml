@@ -1,0 +1,105 @@
+@{
+    var currentCulture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+    var siteSetting = ViewBag.SiteSetting as SiteSetting ?? new SiteSetting { SiteName = "FreelanceHub" };
+    var metaTitle = ViewBag.MetaTitle as string ?? siteSetting.SiteName;
+    var metaDescription = ViewBag.MetaDescription as string ?? siteSetting.Localize(currentCulture, x => x.MetaDescriptionEn, x => x.MetaDescriptionFr);
+}
+<!DOCTYPE html>
+<html lang="@currentCulture">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@metaTitle</title>
+    <meta name="description" content="@metaDescription" />
+    <link rel="icon" type="image/x-icon" href="@(siteSetting.FaviconPath ?? "/favicon.ico")" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FreelanceHub.Web.styles.css" asp-append-version="true" />
+</head>
+<body class="site-shell">
+    <div class="bg-orb orb-one"></div>
+    <div class="bg-orb orb-two"></div>
+
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index" asp-route-culture="@currentCulture">
+                    @siteSetting.SiteName
+                </a>
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#site-nav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="site-nav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" asp-route-culture="@currentCulture">@Html.Localize("Home", "Accueil")</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About" asp-route-culture="@currentCulture">@Html.Localize("About", "A propos")</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Services" asp-route-culture="@currentCulture">@Html.Localize("Services", "Services")</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Projects" asp-route-culture="@currentCulture">@Html.Localize("Projects", "Projets")</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Experience" asp-route-culture="@currentCulture">@Html.Localize("Experience", "Experience")</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact" asp-route-culture="@currentCulture">@Html.Localize("Contact", "Contact")</a></li>
+                        <li class="nav-item">
+                            <div class="language-switcher">
+                                <a class="@(currentCulture == "fr" ? "active" : "")" href="@Context.Request.SwitchCulturePath("fr")">FR</a>
+                                <a class="@(currentCulture == "en" ? "active" : "")" href="@Context.Request.SwitchCulturePath("en")">EN</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container pt-3">
+            @if (TempData["PublicSuccess"] is string success)
+            {
+                <div class="alert alert-success border-0">@success</div>
+            }
+        </div>
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer mt-5">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <p class="eyebrow">@Html.Localize("Independent .NET consultant", "Consultant .NET independant")</p>
+                    <h3>@siteSetting.SiteName</h3>
+                    <p>@siteSetting.Localize(currentCulture, x => x.FooterTextEn, x => x.FooterTextFr)</p>
+                </div>
+                <div>
+                    <p class="eyebrow">@Html.Localize("Contact", "Contact")</p>
+                    <a href="mailto:@siteSetting.ContactEmail">@siteSetting.ContactEmail</a>
+                    <p class="mb-0">@siteSetting.Location</p>
+                </div>
+                <div>
+                    <p class="eyebrow">@Html.Localize("Links", "Liens")</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        @if (!string.IsNullOrWhiteSpace(siteSetting.LinkedInUrl))
+                        {
+                            <a href="@siteSetting.LinkedInUrl" target="_blank" rel="noreferrer">LinkedIn</a>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(siteSetting.GitHubUrl))
+                        {
+                            <a href="@siteSetting.GitHubUrl" target="_blank" rel="noreferrer">GitHub</a>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(siteSetting.CalendlyUrl))
+                        {
+                            <a href="@siteSetting.CalendlyUrl" target="_blank" rel="noreferrer">Calendly</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,44 @@
+@model AdminListPageViewModel<Service>
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-accent">New service</a>
+</div>
+
+<div class="section-card">
+    <div class="table-responsive">
+        <table class="table table-dark align-middle mb-0 admin-table">
+            <thead>
+                <tr>
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "English title", SortKey = "titleEn", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "titleEn", dir = Model.SortState.GetNextDirection("titleEn") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "French title", SortKey = "titleFr", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "titleFr", dir = Model.SortState.GetNextDirection("titleFr") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Icon", SortKey = "icon", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "icon", dir = Model.SortState.GetNextDirection("icon") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Order", SortKey = "order", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "order", dir = Model.SortState.GetNextDirection("order") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Status", SortKey = "status", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "status", dir = Model.SortState.GetNextDirection("status") })! }' />
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr class="clickable-row" data-href="@Url.Action("Edit", new { id = item.Id })" tabindex="0">
+                        <td>@item.TitleEn</td>
+                        <td>@item.TitleFr</td>
+                        <td><span class="icon-pill icon-pill-sm"><i class="@item.IconClass"></i></span></td>
+                        <td>@item.DisplayOrder</td>
+                        <td>@(item.IsPublished ? "Published" : "Draft")</td>
+                        <td class="text-end">
+                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline row-action-form">
+                                <button type="submit"
+                                        class="btn btn-sm btn-icon btn-outline-danger"
+                                        data-delete-confirm="true"
+                                        data-delete-message="Delete this service permanently?">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

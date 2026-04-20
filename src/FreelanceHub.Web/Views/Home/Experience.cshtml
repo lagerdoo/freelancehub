@@ -1,0 +1,27 @@
+@model FreelanceHub.Web.ViewModels.Public.ExperiencePageViewModel
+@{
+    var culture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+}
+
+<section class="section-shell first-section">
+    <div class="container">
+        <div class="section-heading narrow">
+            <p class="eyebrow">@Html.Localize("Experience", "Experience")</p>
+            <h1>@Html.Localize("Roles, sectors, and delivery contexts", "Roles, secteurs et contextes de delivery")</h1>
+        </div>
+        <div class="timeline-stack">
+            @foreach (var item in Model.ExperienceEntries)
+            {
+                <article class="timeline-card">
+                    <div class="timeline-dates">@item.StartDate.ToString("MM/yyyy") - @(item.EndDate?.ToString("MM/yyyy") ?? (culture.IsFrench() ? "Aujourd'hui" : "Present"))</div>
+                    <div>
+                        <h3>@item.GetRole(culture)</h3>
+                        <p class="timeline-company">@item.Company • @item.Location</p>
+                        <p>@item.GetDescription(culture)</p>
+                        <div class="tech-badge">@item.Technologies</div>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>

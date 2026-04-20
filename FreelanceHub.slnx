@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FreelanceHub.Application/FreelanceHub.Application.csproj" />
+    <Project Path="src/FreelanceHub.Domain/FreelanceHub.Domain.csproj" />
+    <Project Path="src/FreelanceHub.Infrastructure/FreelanceHub.Infrastructure.csproj" />
+    <Project Path="src/FreelanceHub.Web/FreelanceHub.Web.csproj" />
+  </Folder>
+</Solution>

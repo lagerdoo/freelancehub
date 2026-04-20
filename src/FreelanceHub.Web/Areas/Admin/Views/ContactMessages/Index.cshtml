@@ -1,0 +1,55 @@
+@model AdminListPageViewModel<ContactMessage>
+
+<div class="section-card">
+    <div class="table-responsive">
+        <table class="table table-dark align-middle mb-0 admin-table">
+            <thead>
+                <tr>
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Name", SortKey = "name", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "name", dir = Model.SortState.GetNextDirection("name") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Email", SortKey = "email", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "email", dir = Model.SortState.GetNextDirection("email") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Subject", SortKey = "subject", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "subject", dir = Model.SortState.GetNextDirection("subject") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Message status", SortKey = "status", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "status", dir = Model.SortState.GetNextDirection("status") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Follow-up", SortKey = "followup", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "followup", dir = Model.SortState.GetNextDirection("followup") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Date", SortKey = "date", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "date", dir = Model.SortState.GetNextDirection("date") })! }' />
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    var statusIcon = item.IsArchived ? "fa-box-archive" : item.IsRead ? "fa-envelope-open-text" : "fa-envelope";
+                    var statusLabel = item.IsArchived ? "Archived / Archive" : item.IsRead ? "Read / Lu" : "Unread / Non lu";
+                    var followUpIcon = item.FollowUpStatus switch
+                    {
+                        ContactFollowUpStatus.Replied => "fa-reply",
+                        ContactFollowUpStatus.ReplyFailed => "fa-triangle-exclamation",
+                        _ => "fa-hourglass-half"
+                    };
+                    var followUpLabel = item.FollowUpStatus switch
+                    {
+                        ContactFollowUpStatus.Replied => "Replied / Repondu",
+                        ContactFollowUpStatus.ReplyFailed => "Reply failed / Echec de reponse",
+                        _ => "Awaiting reply / En attente de reponse"
+                    };
+                    <tr class="clickable-row" data-href="@Url.Action("Details", new { id = item.Id })" tabindex="0">
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.Subject</td>
+                        <td>
+                            <span class="status-icon" data-bs-toggle="tooltip" data-bs-title="@statusLabel">
+                                <i class="fa-solid @statusIcon"></i>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status-icon" data-bs-toggle="tooltip" data-bs-title="@followUpLabel">
+                                <i class="fa-solid @followUpIcon"></i>
+                            </span>
+                        </td>
+                        <td>@item.CreatedAtUtc.ToLocalTime().ToString("g")</td>
+                        <td class="text-end"><i class="fa-solid fa-chevron-right text-secondary"></i></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

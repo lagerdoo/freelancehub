@@ -1,0 +1,19 @@
+[Unit]
+Description=FreelanceHub ASP.NET Core application
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/freelancehub/current
+ExecStart=/usr/bin/dotnet /var/www/freelancehub/current/FreelanceHub.Web.dll
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+SyslogIdentifier=freelancehub
+User=www-data
+Group=www-data
+EnvironmentFile=/etc/freelancehub/freelancehub.env
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://127.0.0.1:5000
+
+[Install]
+WantedBy=multi-user.target

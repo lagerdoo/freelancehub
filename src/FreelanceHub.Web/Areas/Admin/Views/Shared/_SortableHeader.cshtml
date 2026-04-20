@@ -1,0 +1,8 @@
+@model AdminSortHeaderViewModel
+
+<th scope="col">
+    <a href="@Model.Href" class="admin-sort-link @(Model.IsActive ? "active" : null)">
+        <span>@Model.Label</span>
+        <i class="@Model.IconClass" aria-hidden="true"></i>
+    </a>
+</th>

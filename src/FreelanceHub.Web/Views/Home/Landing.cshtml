@@ -1,0 +1,88 @@
+@model FreelanceHub.Web.ViewModels.Public.HomePageViewModel
+@{
+    var culture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+    var site = Model.Snapshot.SiteSetting;
+}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-panel">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <p class="eyebrow">@site.Localize(culture, x => x.TaglineEn, x => x.TaglineFr)</p>
+                    <h2>@site.Localize(culture, x => x.HeroTitleEn, x => x.HeroTitleFr)</h2>
+                    <p class="hero-copy">@site.Localize(culture, x => x.HeroSubtitleEn, x => x.HeroSubtitleFr)</p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <a class="btn btn-accent" asp-action="Contact" asp-route-culture="@culture">@Html.Localize("Start a discussion", "Demarrer un echange")</a>
+                        <a class="btn btn-outline-light" asp-action="Projects" asp-route-culture="@culture">@Html.Localize("See selected work", "Voir une selection de projets")</a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="hero-sidecard">
+                        <div class="metric"><span>10+</span><small>@Html.Localize("years building business software", "ans a construire des logiciels metier")</small></div>
+                        <div class="metric"><span>.NET 8</span><small>@Html.Localize("practical architecture for maintainable delivery", "architecture pragmatique pour un delivery maintenable")</small></div>
+                        <div class="metric"><span>FR / EN</span><small>@Html.Localize("consulting, documentation, and stakeholder communication", "conseil, documentation et communication parties prenantes")</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-shell">
+    <div class="container">
+        <div class="section-heading">
+            <p class="eyebrow">@Html.Localize("Core offers", "Offres principales")</p>
+            <h2>@Html.Localize("Services built for difficult backend situations", "Des services pour les sujets backend exigeants")</h2>
+        </div>
+        <div class="row g-4">
+            @foreach (var service in Model.Snapshot.Services)
+            {
+                <div class="col-lg-4">
+                    <article class="section-card h-100">
+                        <div class="icon-pill"><i class="@service.IconClass"></i></div>
+                        <h3>@service.GetTitle(culture)</h3>
+                        <p class="text-secondary">@service.GetSummary(culture)</p>
+                    </article>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section-shell compact-top">
+    <div class="container">
+        <div class="section-heading">
+            <p class="eyebrow">@Html.Localize("Selected work", "Projets choisis")</p>
+            <h2>@Html.Localize("Recent delivery with clear business impact", "Des livraisons recentes avec impact metier clair")</h2>
+        </div>
+        <div class="row g-4">
+            @foreach (var project in Model.Snapshot.FeaturedProjects)
+            {
+                <div class="col-lg-4">
+                    <article class="project-card h-100">
+                        <div class="project-meta">@project.TechStack</div>
+                        <h3>@project.GetTitle(culture)</h3>
+                        <p>@project.GetSummary(culture)</p>
+                        @if (!string.IsNullOrWhiteSpace(project.ExternalLink))
+                        {
+                            <a href="@project.ExternalLink" target="_blank" rel="noreferrer">@Html.Localize("External link", "Lien externe")</a>
+                        }
+                    </article>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section-shell compact-top">
+    <div class="container">
+        <div class="cta-band">
+            <div>
+                <p class="eyebrow">@Html.Localize("Need technical clarity?", "Besoin de clarte technique ?")</p>
+                <h2>@Html.Localize("I can step in for architecture, modernization, or delivery recovery.", "Je peux intervenir sur l'architecture, la modernisation ou la reprise de delivery.")</h2>
+            </div>
+            <a class="btn btn-accent" asp-action="Contact" asp-route-culture="@culture">@Html.Localize("Contact me", "Me contacter")</a>
+        </div>
+    </div>
+</section>

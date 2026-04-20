@@ -1,0 +1,97 @@
+@model FreelanceHub.Web.ViewModels.Admin.SiteSettingFormViewModel
+
+<div class="section-card">
+    <form method="post" class="row g-3">
+        <input asp-for="Id" type="hidden" />
+        <div class="col-md-4">
+            <label asp-for="SiteName" class="form-label"></label>
+            <input asp-for="SiteName" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="ContactEmail" class="form-label"></label>
+            <input asp-for="ContactEmail" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Location" class="form-label"></label>
+            <input asp-for="Location" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="TaglineEn" class="form-label"></label>
+            <input asp-for="TaglineEn" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="TaglineFr" class="form-label"></label>
+            <input asp-for="TaglineFr" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="HeroTitleEn" class="form-label"></label>
+            <textarea asp-for="HeroTitleEn" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="HeroTitleFr" class="form-label"></label>
+            <textarea asp-for="HeroTitleFr" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="HeroSubtitleEn" class="form-label"></label>
+            <textarea asp-for="HeroSubtitleEn" class="form-control" rows="4"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="HeroSubtitleFr" class="form-label"></label>
+            <textarea asp-for="HeroSubtitleFr" class="form-control" rows="4"></textarea>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="LinkedInUrl" class="form-label"></label>
+            <input asp-for="LinkedInUrl" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="GitHubUrl" class="form-label"></label>
+            <input asp-for="GitHubUrl" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="MaltUrl" class="form-label"></label>
+            <input asp-for="MaltUrl" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="CalendlyUrl" class="form-label"></label>
+            <input asp-for="CalendlyUrl" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="FooterTextEn" class="form-label"></label>
+            <textarea asp-for="FooterTextEn" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="FooterTextFr" class="form-label"></label>
+            <textarea asp-for="FooterTextFr" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="MetaTitleEn" class="form-label"></label>
+            <input asp-for="MetaTitleEn" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="MetaTitleFr" class="form-label"></label>
+            <input asp-for="MetaTitleFr" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="MetaDescriptionEn" class="form-label"></label>
+            <textarea asp-for="MetaDescriptionEn" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="MetaDescriptionFr" class="form-label"></label>
+            <textarea asp-for="MetaDescriptionFr" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="LogoPath" class="form-label"></label>
+            <input asp-for="LogoPath" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="FaviconPath" class="form-label"></label>
+            <input asp-for="FaviconPath" class="form-control" />
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-accent">Save settings</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

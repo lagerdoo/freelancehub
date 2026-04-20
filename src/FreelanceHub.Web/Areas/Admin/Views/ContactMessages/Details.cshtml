@@ -1,0 +1,124 @@
+@model ContactMessageDetailsViewModel
+
+<partial name="_AdminBackButton" model="@Url.Action("Index", "ContactMessages", new { area = "Admin" })!" />
+
+<div class="section-card mb-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <strong>Name</strong>
+            <p>@Model.Message.Name</p>
+        </div>
+        <div class="col-md-6">
+            <strong>Email</strong>
+            <p>@Model.Message.Email</p>
+        </div>
+        <div class="col-12">
+            <strong>Subject</strong>
+            <p>@Model.Message.Subject</p>
+        </div>
+        <div class="col-12">
+            <strong>Message</strong>
+            <p class="mb-0">@Model.Message.Message</p>
+        </div>
+    </div>
+</div>
+
+<div class="section-card mb-4">
+    <div class="row g-4 align-items-start">
+        <div class="col-lg-7">
+            <form asp-action="UpdateStatus" asp-route-id="@Model.Message.Id" method="post" class="row g-3">
+                <div class="col-md-4 form-check ms-2">
+                    <input type="checkbox" name="isRead" value="true" class="form-check-input" @(Model.Message.IsRead ? "checked" : "") />
+                    <input type="hidden" name="isRead" value="false" />
+                    <label class="form-check-label">Read</label>
+                </div>
+                <div class="col-md-4 form-check ms-2">
+                    <input type="checkbox" name="isArchived" value="true" class="form-check-input" @(Model.Message.IsArchived ? "checked" : "") />
+                    <input type="hidden" name="isArchived" value="false" />
+                    <label class="form-check-label">Archived</label>
+                </div>
+                <div class="col-12 d-flex flex-wrap gap-2">
+                    <button type="submit" class="btn btn-accent">Save status</button>
+                    <button type="submit"
+                            class="btn btn-outline-danger"
+                            formaction="@Url.Action("Delete", "ContactMessages", new { area = "Admin", id = Model.Message.Id })"
+                            data-delete-confirm="true"
+                            data-delete-message="Delete this message permanently? This action cannot be undone.">
+                        <i class="fa-solid fa-trash me-2"></i>Delete permanently
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-5">
+            <div class="admin-status-card">
+                <p class="eyebrow mb-2">Follow-up</p>
+                <h3 class="mb-3">@(Model.Message.FollowUpStatus == ContactFollowUpStatus.Replied ? "Reply sent" : Model.Message.FollowUpStatus == ContactFollowUpStatus.ReplyFailed ? "Reply failed" : "Awaiting reply")</h3>
+                <div class="small text-secondary d-grid gap-2">
+                    <div><strong class="text-white">Status:</strong> @(Model.Message.FollowUpStatus == ContactFollowUpStatus.Replied ? "Replied" : Model.Message.FollowUpStatus == ContactFollowUpStatus.ReplyFailed ? "Reply failed" : "Awaiting reply")</div>
+                    <div><strong class="text-white">Last reply:</strong> @(Model.Message.LastReplyAtUtc?.ToLocalTime().ToString("g") ?? "No email sent yet")</div>
+                    @if (!string.IsNullOrWhiteSpace(Model.Message.LastReplySubject))
+                    {
+                        <div><strong class="text-white">Subject:</strong> @Model.Message.LastReplySubject</div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.Message.LastReplyPreview))
+                    {
+                        <div><strong class="text-white">Preview:</strong> @Model.Message.LastReplyPreview</div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.Message.LastReplyError))
+                    {
+                        <div class="text-danger"><strong>Last error:</strong> @Model.Message.LastReplyError</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-card">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+            <p class="eyebrow mb-1">Email reply</p>
+            <h3 class="mb-0">Respond to this message</h3>
+        </div>
+        <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#replyPanel" aria-expanded="true" aria-controls="replyPanel">
+            <i class="fa-solid fa-reply me-2"></i>Open reply form
+        </button>
+    </div>
+    <div class="collapse show" id="replyPanel">
+        <form asp-action="Reply" asp-route-id="@Model.Message.Id" method="post" class="row g-3">
+            <input asp-for="ReplyForm.MessageId" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+            <div class="col-md-6">
+                <label asp-for="ReplyForm.ToEmail" class="form-label"></label>
+                <input asp-for="ReplyForm.ToEmail" class="form-control" />
+                <span asp-validation-for="ReplyForm.ToEmail" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ReplyForm.Subject" class="form-label"></label>
+                <input asp-for="ReplyForm.Subject" class="form-control" />
+                <span asp-validation-for="ReplyForm.Subject" class="text-danger small"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="ReplyForm.Body" class="form-label"></label>
+                <textarea asp-for="ReplyForm.Body" class="form-control" rows="9" placeholder="Write your response to the client."></textarea>
+                <span asp-validation-for="ReplyForm.Body" class="text-danger small"></span>
+                <div class="form-text">The reply is sent to the customer email address above and the latest outcome is tracked on this message.</div>
+            </div>
+            <div class="col-12">
+                <div class="admin-inline-note">
+                    <strong>Original message</strong>
+                    <p class="mb-0 mt-2 text-secondary">@Model.Message.Message</p>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-accent">
+                    <i class="fa-solid fa-paper-plane me-2"></i>Send reply
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

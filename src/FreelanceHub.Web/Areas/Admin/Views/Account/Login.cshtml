@@ -1,0 +1,39 @@
+@model FreelanceHub.Web.ViewModels.Admin.LoginViewModel
+@{
+    ViewBag.AdminPageTitle = "Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="auth-shell rounded-5 p-4 p-lg-5">
+            <p class="eyebrow">Secure access</p>
+            <h2 class="mb-3">Administrator login</h2>
+            <p class="text-secondary">Use the seeded administrator account to access the content management area.</p>
+            <form method="post" class="row g-3">
+                <input asp-for="ReturnUrl" type="hidden" />
+                <div class="col-12">
+                    <label asp-for="UsernameOrEmail" class="form-label">Username or email</label>
+                    <input asp-for="UsernameOrEmail" class="form-control" />
+                    <span asp-validation-for="UsernameOrEmail" class="text-danger small"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+                <div class="col-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-accent w-100">Sign in</button>
+                </div>
+            </form>
+            <div class="small text-secondary mt-4">
+                Development seed: <code>admin / DevAdmin#2026</code>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

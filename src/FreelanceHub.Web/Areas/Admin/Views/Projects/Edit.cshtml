@@ -1,0 +1,67 @@
+@model FreelanceHub.Web.ViewModels.Admin.ProjectFormViewModel
+
+<partial name="_AdminBackButton" model="@Url.Action("Index", "Projects", new { area = "Admin" })!" />
+
+<div class="section-card">
+    <form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="row g-3">
+        <input asp-for="Id" type="hidden" />
+        <div class="col-md-6">
+            <label asp-for="TitleEn" class="form-label"></label>
+            <input asp-for="TitleEn" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="TitleFr" class="form-label"></label>
+            <input asp-for="TitleFr" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="SummaryEn" class="form-label"></label>
+            <textarea asp-for="SummaryEn" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="SummaryFr" class="form-label"></label>
+            <textarea asp-for="SummaryFr" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DescriptionEn" class="form-label"></label>
+            <textarea asp-for="DescriptionEn" class="form-control" rows="6"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DescriptionFr" class="form-label"></label>
+            <textarea asp-for="DescriptionFr" class="form-control" rows="6"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="TechStack" class="form-label"></label>
+            <input asp-for="TechStack" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="MainImagePath" class="form-label"></label>
+            <input asp-for="MainImagePath" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="ExternalLink" class="form-label"></label>
+            <input asp-for="ExternalLink" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="DisplayOrder" class="form-label"></label>
+            <input asp-for="DisplayOrder" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="Slug" class="form-label"></label>
+            <input asp-for="Slug" class="form-control" />
+        </div>
+        <div class="col-md-3 form-check ms-2">
+            <input asp-for="IsFeatured" class="form-check-input" />
+            <label asp-for="IsFeatured" class="form-check-label"></label>
+        </div>
+        <div class="col-md-3 form-check ms-2">
+            <input asp-for="IsPublished" class="form-check-input" />
+            <label asp-for="IsPublished" class="form-check-label"></label>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-accent">Save project</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

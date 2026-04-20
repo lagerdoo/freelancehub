@@ -1,0 +1,59 @@
+@model FreelanceHub.Web.ViewModels.Admin.ExperienceFormViewModel
+
+<partial name="_AdminBackButton" model="@Url.Action("Index", "Experience", new { area = "Admin" })!" />
+
+<div class="section-card">
+    <form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="row g-3">
+        <input asp-for="Id" type="hidden" />
+        <div class="col-md-6">
+            <label asp-for="RoleEn" class="form-label"></label>
+            <input asp-for="RoleEn" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="RoleFr" class="form-label"></label>
+            <input asp-for="RoleFr" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Company" class="form-label"></label>
+            <input asp-for="Company" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Location" class="form-label"></label>
+            <input asp-for="Location" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="StartDate" class="form-label"></label>
+            <input asp-for="StartDate" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="EndDate" class="form-label"></label>
+            <input asp-for="EndDate" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="DisplayOrder" class="form-label"></label>
+            <input asp-for="DisplayOrder" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DescriptionEn" class="form-label"></label>
+            <textarea asp-for="DescriptionEn" class="form-control" rows="5"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="DescriptionFr" class="form-label"></label>
+            <textarea asp-for="DescriptionFr" class="form-control" rows="5"></textarea>
+        </div>
+        <div class="col-12">
+            <label asp-for="Technologies" class="form-label"></label>
+            <input asp-for="Technologies" class="form-control" />
+        </div>
+        <div class="col-12 form-check">
+            <input asp-for="IsVisible" class="form-check-input" />
+            <label asp-for="IsVisible" class="form-check-label"></label>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-accent">Save experience entry</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

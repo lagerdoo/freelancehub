@@ -1,0 +1,73 @@
+@model FreelanceHub.Web.ViewModels.Public.ContactPageViewModel
+@{
+    var culture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+    var site = ViewBag.SiteSetting as SiteSetting ?? new SiteSetting();
+}
+
+<section class="section-shell first-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="section-card h-100">
+                    <p class="eyebrow">@Html.Localize("Contact", "Contact")</p>
+                    <h1>@Html.Localize("Discuss your project", "Parlons de votre projet")</h1>
+                    <p class="text-secondary">@Html.Localize("Share the current context, the bottleneck, and the expected outcome. I usually respond with a focused next step rather than a generic sales reply.", "Partagez le contexte, le point de friction et le resultat attendu. Je reponds en general avec une prochaine etape concrete plutot qu'un message commercial generique.")</p>
+                    <div class="contact-block">
+                        <span>@Html.Localize("Email", "Email")</span>
+                        <a href="mailto:@site.ContactEmail">@site.ContactEmail</a>
+                    </div>
+                    <div class="contact-block">
+                        <span>@Html.Localize("Location", "Localisation")</span>
+                        <strong>@site.Location</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="section-card h-100">
+                    @if (Model.IsSubmitted)
+                    {
+                        <div class="alert alert-success border-0">@Html.Localize("Your message has been recorded. I will get back to you shortly.", "Votre message a bien ete pris en compte. Je reviens vers vous rapidement.")</div>
+                    }
+                    <form asp-action="Contact" asp-route-culture="@culture" method="post" class="row g-3 contact-form"
+                          data-culture="@culture"
+                          data-msg-name="@(culture.IsFrench() ? "Le nom doit contenir entre 2 et 120 caracteres." : "Name must be between 2 and 120 characters.")"
+                          data-msg-email="@(culture.IsFrench() ? "Veuillez saisir une adresse email valide." : "Please enter a valid email address.")"
+                          data-msg-subject="@(culture.IsFrench() ? "Le sujet doit contenir entre 3 et 140 caracteres." : "Subject must be between 3 and 140 characters.")"
+                          data-msg-message="@(culture.IsFrench() ? "Le message doit contenir entre 20 et 3000 caracteres." : "Message must be between 20 and 3000 characters.")">
+                        <input asp-for="Form.SubmissionToken" type="hidden" />
+                        <div class="honeypot-field" aria-hidden="true">
+                            <label asp-for="Form.Website" class="form-label">Website</label>
+                            <input asp-for="Form.Website" class="form-control" tabindex="-1" autocomplete="off" />
+                        </div>
+                        <div class="col-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Form.Name" class="form-label">@Html.Localize("Name", "Nom")</label>
+                            <input asp-for="Form.Name" class="form-control" autocomplete="name" maxlength="120" data-contact-field="name" />
+                            <span asp-validation-for="Form.Name" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Form.Email" class="form-label">@Html.Localize("Email", "Email")</label>
+                            <input asp-for="Form.Email" class="form-control" autocomplete="email" inputmode="email" maxlength="256" data-contact-field="email" />
+                            <span asp-validation-for="Form.Email" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Form.Subject" class="form-label">@Html.Localize("Subject", "Sujet")</label>
+                            <input asp-for="Form.Subject" class="form-control" maxlength="140" data-contact-field="subject" />
+                            <span asp-validation-for="Form.Subject" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Form.Message" class="form-label">@Html.Localize("Message", "Message")</label>
+                            <textarea asp-for="Form.Message" rows="6" class="form-control" maxlength="3000" data-contact-field="message"></textarea>
+                            <span asp-validation-for="Form.Message" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-accent">@Html.Localize("Send message", "Envoyer le message")</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

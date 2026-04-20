@@ -1,0 +1,42 @@
+@model AdminListPageViewModel<ExperienceEntry>
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-accent">New experience entry</a>
+</div>
+
+<div class="section-card">
+    <div class="table-responsive">
+        <table class="table table-dark align-middle mb-0 admin-table">
+            <thead>
+                <tr>
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Role", SortKey = "role", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "role", dir = Model.SortState.GetNextDirection("role") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Company", SortKey = "company", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "company", dir = Model.SortState.GetNextDirection("company") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Period", SortKey = "period", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "period", dir = Model.SortState.GetNextDirection("period") })! }' />
+                    <partial name="_SortableHeader" model='new AdminSortHeaderViewModel { Label = "Visible", SortKey = "visible", SortState = Model.SortState, Href = Url.Action("Index", new { sort = "visible", dir = Model.SortState.GetNextDirection("visible") })! }' />
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr class="clickable-row" data-href="@Url.Action("Edit", new { id = item.Id })" tabindex="0">
+                        <td>@item.RoleEn</td>
+                        <td>@item.Company</td>
+                        <td>@item.StartDate.ToString("MM/yyyy") - @(item.EndDate?.ToString("MM/yyyy") ?? "Present")</td>
+                        <td>@(item.IsVisible ? "Yes" : "No")</td>
+                        <td class="text-end">
+                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline row-action-form">
+                                <button type="submit"
+                                        class="btn btn-sm btn-icon btn-outline-danger"
+                                        data-delete-confirm="true"
+                                        data-delete-message="Delete this experience entry permanently?">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

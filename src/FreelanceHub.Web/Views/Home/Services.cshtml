@@ -1,0 +1,26 @@
+@model FreelanceHub.Web.ViewModels.Public.ServicesPageViewModel
+@{
+    var culture = (ViewBag.CurrentCulture as string).NormalizeSiteCulture();
+}
+
+<section class="section-shell first-section">
+    <div class="container">
+        <div class="section-heading narrow">
+            <p class="eyebrow">@Html.Localize("Services", "Services")</p>
+            <h1>@Html.Localize("Consulting offers for backend systems that need discipline", "Des offres de conseil pour des systemes backend qui ont besoin de discipline")</h1>
+        </div>
+        <div class="row g-4">
+            @foreach (var service in Model.Services)
+            {
+                <div class="col-lg-4">
+                    <article class="section-card h-100">
+                        <div class="icon-pill"><i class="@service.IconClass"></i></div>
+                        <h3>@service.GetTitle(culture)</h3>
+                        <p class="text-secondary">@service.GetSummary(culture)</p>
+                        <p>@service.GetDescription(culture)</p>
+                    </article>
+                </div>
+            }
+        </div>
+    </div>
+</section>
