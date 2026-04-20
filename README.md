@@ -95,5 +95,5 @@ dotnet tool run dotnet-ef database update --project src/FreelanceHub.Infrastruct
 
 ## Additional project docs
 
-- QA checklist: [docs/QA_CHECKLIST.md](</D:/test/codex/docs/QA_CHECKLIST.md>)
-- OVH Linux VPS deployment: [docs/DEPLOY_OVH_LINUX_VPS.md](</D:/test/codex/docs/DEPLOY_OVH_LINUX_VPS.md>)
+- QA checklist: [docs/QA_CHECKLIST.md](docs/QA_CHECKLIST.md)
+- OVH Linux VPS deployment: [docs/DEPLOY_OVH_LINUX_VPS.md](docs/DEPLOY_OVH_LINUX_VPS.md)
